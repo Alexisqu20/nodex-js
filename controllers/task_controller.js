@@ -21,7 +21,7 @@ app.get('/task', function (req, res) {
                     'data': []
                 });
             }
-            else if (!taskDB) {
+            if (!taskList) {
                 return res.json({
                     'success': false,
                     'message': 'Task doesnt found',
@@ -64,7 +64,7 @@ app.post('/task', function (req, res) {
 
 app.get('/task/:id', function (req, res) {
     let id = req.params.id;
-
+    let data = { active: false };
     Task.findById(id)
         .exec((err, taskDetail) => {
             if (err) {
@@ -74,7 +74,7 @@ app.get('/task/:id', function (req, res) {
                     'data': []
                 });
             }
-            else if (!taskDB) {
+            if (!taskDetail) {
                 return res.json({
                     'success': false,
                     'message': 'Task doesnt found',
